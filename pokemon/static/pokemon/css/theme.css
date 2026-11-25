@@ -1,0 +1,56 @@
+:root {
+  --accent: #D12A45;      /* rouge Pokédex : change-le ici, tout suit */
+  --ink: #1B1B2F;
+  --page-bg: #F5F6FA;
+}
+
+body {
+  font-family: 'Nunito', system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--page-bg);
+}
+
+/* En-tête commun à toutes les pages */
+.site-header {
+  background: var(--accent);
+  padding: 32px 0 40px;
+  border-radius: 0 0 40px 40px;
+}
+.site-title {
+  color: #fff;
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+.site-subtitle { color: #fff; margin: 0; font-size: 1.1rem; }
+
+/* Badges de type */
+.type-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+
+/* Couleur par type : le nom de la classe = le nom du type chez PokéAPI */
+.type-normal   { background: #CBCB9A; }
+.type-fire     { background: #F59A5B; }
+.type-water    { background: #7FA6F5; }
+.type-electric { background: #F8D030; }
+.type-grass    { background: #78C850; }
+.type-ice      { background: #98D8D8; }
+.type-fighting { background: #E07A72; }
+.type-poison   { background: #C27FC2; }
+.type-ground   { background: #E0C068; }
+.type-flying   { background: #B7A6F5; }
+.type-psychic  { background: #F9789E; }
+.type-bug      { background: #BFCB4B; }
+.type-rock     { background: #CDB75A; }
+.type-ghost    { background: #B9A3E3; }
+.type-dragon   { background: #9B7BF8; }
+.type-dark     { background: #A08C7C; }
+.type-steel    { background: #C4C4D8; }
+.type-fairy    { background: #F2AFC0; }
