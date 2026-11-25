@@ -5,7 +5,7 @@ class PokemonDto:
     numero:int
     nom:str
     image:str
-    type:list
+    types:list
     stats:list
     taille:int
     poids:int
