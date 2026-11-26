@@ -24,4 +24,5 @@ urlpatterns = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.accueil),
+    path('pokemon/<int:numero>/', views.fiche, name='fiche'),
 ]
