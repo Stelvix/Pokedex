@@ -1,6 +1,6 @@
 # Données et recherche (Personne A — Steeven)
 
-Cette partie s'occupe de **récupérer les Pokémon**, de **les ranger dans la base de données** et de **les mettre à disposition** du reste de l'application (l'interface, faite par la personne B).
+Cette partie s'occupe de **récupérer les Pokémon**, de **les ranger dans la base de données** et de **les mettre à disposition** du reste de l'application (l'interface, faite par `Tifenn`).
 
 ---
 
