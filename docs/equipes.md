@@ -89,7 +89,6 @@ Tout est dans le dossier `equipes/` (une app Django à part, pour ne pas mélang
 | `equipes/templatetags/equipes_tags.py` | La balise `{% ajout_equipe pokemon %}` qui affiche l'encadré « Équipes » sur la fiche |
 | `equipes/static/equipes/css/equipes.css` | Le style des équipes (classes `eq-…`) |
 | `equipes/migrations/0001_initial.py` | La création des tables dans la base |
-| `equipes/tests.py` | Les tests automatiques |
 
 ### Les adresses
 
@@ -164,20 +163,7 @@ EquipeRepository.supprimer(equipe)                   # supprime l'équipe (pas l
 
 ---
 
-## 7. Tests
-
-```bash
-python manage.py test equipes
-```
-
-- **39 tests** : les règles du modèle, le repository (noms, ajout, retrait, sauvegarde) et toutes les pages / boutons comme un vrai visiteur.
-- Django crée une **base de test vide** à chaque lancement (la vraie base n'est pas touchée), et les tests créent eux-mêmes quelques Pokémon : **pas besoin d'internet**.
-
-> ⚠️ Lancer `python manage.py test equipes`, et pas seulement `python manage.py test` : ce dernier lance aussi le test de `pokemon/tests.py`, qui appelle 251 fois PokéAPI.
-
----
-
-## 8. Fichiers modifiés en dehors de `equipes/`
+## 7. Fichiers modifiés en dehors de `equipes/`
 
 Pour brancher les équipes au reste du site, quelques lignes ont été ajoutées dans des fichiers communs :
 
@@ -190,7 +176,7 @@ Pour brancher les équipes au reste du site, quelques lignes ont été ajoutées
 
 ---
 
-## 9. Problèmes fréquents
+## 8. Problèmes fréquents
 
 | Problème | Solution |
 |----------|----------|
