@@ -5,10 +5,12 @@ from pokemon.models import Pokemon
 
 # Nombre maximum de Pokémon dans une équipe
 TAILLE_MAX_EQUIPE = 5
+# Longueur maximum du nom d'une équipe
+LONGUEUR_MAX_NOM = 50
 
 
 class Equipe(models.Model):
-    nom = models.CharField(max_length=50, unique=True)
+    nom = models.CharField(max_length=LONGUEUR_MAX_NOM, unique=True)
     pokemons = models.ManyToManyField(Pokemon, related_name="equipes", blank=True)
     date_creation = models.DateTimeField(auto_now_add=True)
 
@@ -39,5 +41,8 @@ class Equipe(models.Model):
         self.pokemons.add(pokemon)
 
     def retirer_pokemon(self, pokemon: Pokemon) -> None:
-        """Retire un Pokémon de l'équipe (le Pokémon reste dans le Pokédex)."""
+        """Retire un Pokémon de l'équipe (le Pokémon reste dans le Pokédex).
+        Lève une ValidationError si le Pokémon n'est pas dans l'équipe."""
+        if not self.pokemons.filter(pk=pokemon.pk).exists():
+            raise ValidationError(f"{pokemon.nom.capitalize()} n'est pas dans l'équipe.")
         self.pokemons.remove(pokemon)
