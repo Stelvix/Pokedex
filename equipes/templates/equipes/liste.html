@@ -1,0 +1,53 @@
+{% extends "pokemon/base.html" %}
+
+{% block title %}Mes équipes – Pokédex{% endblock %}
+
+{% block content %}
+<div class="eq-page">
+
+  <h1 class="eq-titre">Mes équipes</h1>
+  <p class="eq-sous-titre">Jusqu'à {{ taille_max }} Pokémon par équipe.</p>
+
+  {% include "equipes/_messages.html" %}
+
+  {# Création d'une équipe #}
+  <form class="eq-panneau" action="{% url 'equipes:creer' %}" method="post">
+    {% csrf_token %}
+    <label class="eq-label" for="{{ form.nom.id_for_label }}">Nouvelle équipe</label>
+    <div class="d-flex flex-wrap gap-2">
+      {{ form.nom }}
+      <button type="submit" class="eq-btn">Créer l'équipe</button>
+    </div>
+  </form>
+
+  {# Liste des équipes #}
+  {% if equipes %}
+    <div class="row g-4">
+      {% for equipe in equipes %}
+        <div class="col-12 col-md-6">
+          <a class="eq-carte" href="{% url 'equipes:detail' equipe.pk %}">
+            <div class="d-flex justify-content-between align-items-center gap-2">
+              <h2 class="eq-carte-nom">{{ equipe.nom }}</h2>
+              <span class="eq-compteur{% if equipe.est_complete %} eq-compteur-plein{% endif %}">
+                {{ equipe.nb_pokemons }}/{{ taille_max }}
+              </span>
+            </div>
+            <div class="eq-slots">
+              {% for p in equipe.pokemons.all %}
+                <img class="eq-slot type-{{ p.types.0 }}" src="{{ p.image }}"
+                     alt="{{ p.nom|capfirst }}" title="{{ p.nom|capfirst }}">
+              {% endfor %}
+              {% for place in equipe.places_libres %}
+                <span class="eq-slot eq-slot-vide" aria-hidden="true"></span>
+              {% endfor %}
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="eq-vide">Aucune équipe pour l'instant : choisissez un nom ci-dessus pour créer la première.</p>
+  {% endif %}
+
+</div>
+{% endblock %}

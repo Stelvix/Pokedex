@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'pokemon/css/theme.css' %}">
+  <link rel="stylesheet" href="{% static 'equipes/css/equipes.css' %}">
 </head>
 <body>
 
@@ -18,6 +19,7 @@
         <a class="site-title" href="/">Pokédex</a>
         <p class="site-subtitle">251 Pokémon à découvrir</p>
       </div>
+      <a class="eq-lien-header ms-auto" href="{% url 'equipes:liste' %}">Mes équipes</a>
       <form class="recherche" action="{% url 'aller' %}" method="get">
         <label for="numero" class="visually-hidden">Numéro du Pokémon</label>
         <input id="numero" name="numero" type="number" min="1" max="251" required placeholder="N° (1-251)">

@@ -4,6 +4,7 @@ Ceci est un projet pokedex fait en python
 ## Documentation
 
 - [Données et recherche (installation, dépendances, fonctionnement des données)](docs/donnees.md)
+- [Gestion des équipes (création, règles, sauvegarde)](docs/equipes.md)
 
 ### Notifications Discord – GitHub Webhook
 

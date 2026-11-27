@@ -1,0 +1,33 @@
+{# Encadré « Équipes » affiché sur la fiche d'un Pokémon (voir templatetags/equipes_tags.py) #}
+<section class="eq-fiche" aria-labelledby="eq-fiche-titre">
+  <h2 id="eq-fiche-titre">Équipes</h2>
+
+  {% include "equipes/_messages.html" %}
+
+  {% if dans_equipes %}
+    <p>
+      Fait partie de :
+      {% for e in dans_equipes %}
+        <a href="{% url 'equipes:detail' e.pk %}">{{ e.nom }}</a>{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    </p>
+  {% endif %}
+
+  {% if choix %}
+    <form class="d-flex flex-wrap gap-2" action="{% url 'equipes:ajouter_depuis_fiche' pokemon.numero %}" method="post">
+      {% csrf_token %}
+      <label class="visually-hidden" for="eq-choix-equipe">Choisir une équipe</label>
+      <select class="form-select" id="eq-choix-equipe" name="equipe" required>
+        <option value="">Choisir une équipe…</option>
+        {% for c in choix %}
+          <option value="{{ c.equipe.pk }}"{% if c.raison %} disabled{% endif %}>
+            {{ c.equipe.nom }} ({{ c.nb }}/{{ taille_max }}){% if c.raison %} – {{ c.raison }}{% endif %}
+          </option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="eq-btn">Ajouter à l'équipe</button>
+    </form>
+  {% else %}
+    <p class="eq-vide">Aucune équipe pour l'instant. <a href="{% url 'equipes:liste' %}">Créer une équipe</a></p>
+  {% endif %}
+</section>

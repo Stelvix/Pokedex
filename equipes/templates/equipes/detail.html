@@ -1,0 +1,76 @@
+{% extends "pokemon/base.html" %}
+
+{% block title %}{{ equipe.nom }} – Mes équipes{% endblock %}
+
+{% block content %}
+<div class="eq-page">
+
+  <a class="btn-nav eq-retour mb-4" href="{% url 'equipes:liste' %}">&laquo; Mes équipes</a>
+
+  {% include "equipes/_messages.html" %}
+
+  <div class="eq-panneau">
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <h1 class="eq-titre">{{ equipe.nom }}</h1>
+      <span class="eq-compteur{% if equipe.est_complete %} eq-compteur-plein{% endif %}">
+        {{ pokemons|length }}/{{ taille_max }} Pokémon
+      </span>
+    </div>
+
+    {# Les Pokémon de l'équipe, puis les places libres #}
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3 mt-2">
+      {% for p in pokemons %}
+        <div class="col">
+          <div class="carte-pokemon type-{{ p.types.0 }} eq-membre">
+            <a class="eq-membre-lien" href="{% url 'fiche' p.numero %}">
+              <img src="{{ p.image }}" alt="" width="96" height="96">
+              <span class="eq-membre-nom">{{ p.nom|capfirst }}</span>
+              <span class="eq-membre-numero">#{{ p.numero|stringformat:"03d" }}</span>
+            </a>
+            <form action="{% url 'equipes:retirer' equipe.pk p.numero %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="eq-btn-retirer"
+                      aria-label="Retirer {{ p.nom|capfirst }} de l'équipe">Retirer</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+      {% for place in equipe.places_libres %}
+        <div class="col">
+          <div class="eq-place-libre">Place libre</div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {# Ajout d'un Pokémon #}
+    <h2>Ajouter un Pokémon</h2>
+    {% if equipe.est_complete %}
+      <p class="eq-vide">L'équipe est complète ({{ taille_max }} Pokémon maximum). Retirez un Pokémon pour en ajouter un autre.</p>
+    {% else %}
+      <form class="d-flex flex-wrap gap-2" action="{% url 'equipes:ajouter' equipe.pk %}" method="post">
+        {% csrf_token %}
+        <label class="visually-hidden" for="{{ form_ajout.pokemon.id_for_label }}">{{ form_ajout.pokemon.label }}</label>
+        {{ form_ajout.pokemon }}
+        <button type="submit" class="eq-btn">Ajouter</button>
+      </form>
+    {% endif %}
+
+    {# Modification de l'équipe #}
+    <h2>Modifier l'équipe</h2>
+    <form class="d-flex flex-wrap gap-2" action="{% url 'equipes:renommer' equipe.pk %}" method="post">
+      {% csrf_token %}
+      <label class="visually-hidden" for="{{ form_nom.nom.id_for_label }}">Nouveau nom de l'équipe</label>
+      {{ form_nom.nom }}
+      <button type="submit" class="eq-btn">Renommer</button>
+    </form>
+
+    <form class="mt-4" action="{% url 'equipes:supprimer' equipe.pk %}" method="post"
+          onsubmit="return confirm('Supprimer définitivement l’équipe « {{ equipe.nom|escapejs }} » ?');">
+      {% csrf_token %}
+      <button type="submit" class="eq-btn eq-btn-danger">Supprimer l'équipe</button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}
