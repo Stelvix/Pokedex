@@ -59,7 +59,7 @@ La base **SQLite** est déjà incluse dans Python, il n'y a rien à installer en
 
 ```
 PokéAPI  ──►  Service  ──►  DTO  ──►  Repository  ──►  Base SQLite  ──►  Pages du site
-(internet)   (récupère)   (trie)    (enregistre)      (db.sqlite3)     (personne B)
+(internet)   (récupère)   (trie)    (enregistre)      (db.sqlite3)     `Tifenn`)
 ```
 
 1. Le **service** va chercher le Pokémon sur PokéAPI.
