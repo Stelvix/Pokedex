@@ -1,7 +1,7 @@
 import requests
 from django.core.management.base import BaseCommand
 
-from pokemon.PokemonRepository.pokemonRepository import PokemonRepository
+from pokemon.Repository.pokemonRepository import PokemonRepository
 from pokemon.services.pokeaApiService import PokeaApiService
 
 
