@@ -4,7 +4,7 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
-from equipes.forms import AjoutPokemonForm, NomEquipeForm
+from equipes.forms import AjoutPokemonForm, ChoixEquipeForm, NomEquipeForm
 from equipes.models import TAILLE_MAX_EQUIPE
 from equipes.Repository.equipeRepository import EquipeRepository
 
@@ -129,3 +129,21 @@ def retirer(request, equipe_id, numero):
     else:
         messages.success(request, f"{pokemon.nom.capitalize()} a quitté l'équipe.")
     return redirect("equipes:detail", equipe_id=equipe.pk)
+
+
+@require_POST
+def ajouter_depuis_fiche(request, numero):
+    """Bouton « Ajouter à l'équipe » de la fiche d'un Pokémon.
+    Revient ensuite sur la fiche, où le message s'affiche."""
+    form = ChoixEquipeForm(request.POST)
+    if not form.is_valid():
+        _afficher_erreurs(request, form.errors)
+        return redirect("fiche", numero=numero)
+    equipe = form.cleaned_data["equipe"]
+    try:
+        pokemon = EquipeRepository.ajouter_pokemon(equipe, numero)
+    except ValidationError as e:
+        _afficher_erreurs(request, e)
+    else:
+        messages.success(request, f"{pokemon.nom.capitalize()} a rejoint l'équipe « {equipe.nom} ».")
+    return redirect("fiche", numero=numero)

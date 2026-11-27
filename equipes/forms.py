@@ -1,6 +1,6 @@
 from django import forms
 
-from equipes.models import LONGUEUR_MAX_NOM
+from equipes.models import Equipe, LONGUEUR_MAX_NOM
 from pokemon.models import Pokemon
 
 
@@ -38,4 +38,17 @@ class AjoutPokemonForm(forms.Form):
             "invalid_choice": "Ce Pokémon n'existe pas dans le Pokédex.",
         },
         widget=forms.Select(attrs={"class": "form-select"}),
+    )
+
+
+class ChoixEquipeForm(forms.Form):
+    """Formulaire de la fiche d'un Pokémon : choisir l'équipe où l'ajouter.
+    La liste déroulante est écrite à la main dans _ajout_depuis_fiche.html
+    (pour griser les équipes pleines) ; ce formulaire sert à vérifier le choix."""
+    equipe = forms.ModelChoiceField(
+        queryset=Equipe.objects.all(),
+        error_messages={
+            "required": "Il faut choisir une équipe.",
+            "invalid_choice": "Cette équipe n'existe pas.",
+        },
     )

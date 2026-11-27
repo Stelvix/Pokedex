@@ -29,6 +29,10 @@ class Equipe(models.Model):
     def est_complete(self) -> bool:
         return self.nb_pokemons() >= TAILLE_MAX_EQUIPE
 
+    def places_libres(self) -> range:
+        """Places vides de l'équipe, pour les afficher (ex. 2 Pokémon → 3 places)."""
+        return range(TAILLE_MAX_EQUIPE - self.nb_pokemons())
+
     def ajouter_pokemon(self, pokemon: Pokemon) -> None:
         """Ajoute un Pokémon à l'équipe.
         Lève une ValidationError si l'équipe est pleine ou si le Pokémon y est déjà."""

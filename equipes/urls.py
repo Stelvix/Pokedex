@@ -16,4 +16,7 @@ urlpatterns = [
     path("<int:equipe_id>/supprimer/", views.supprimer, name="supprimer"),
     path("<int:equipe_id>/ajouter/", views.ajouter, name="ajouter"),
     path("<int:equipe_id>/retirer/<int:numero>/", views.retirer, name="retirer"),
+
+    # Bouton « Ajouter à l'équipe » de la fiche d'un Pokémon (POST)
+    path("pokemon/<int:numero>/ajouter/", views.ajouter_depuis_fiche, name="ajouter_depuis_fiche"),
 ]
