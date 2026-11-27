@@ -1,3 +1,4 @@
+NB_POKEMON = 251
 # Préparation des données pour l'affichage (partie interface, personne B)
 
 STAT_LABELS = {

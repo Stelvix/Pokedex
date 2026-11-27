@@ -1,12 +1,24 @@
 {% extends "pokemon/base.html" %}
 
 {% block content %}
-  <h2>Test du gabarit</h2>
-  <p>
-    <span class="type-badge type-electric">Electric</span>
-    <span class="type-badge type-fire">Fire</span>
-    <span class="type-badge type-water">Water</span>
-    <span class="type-badge type-grass">Grass</span>
-    <span class="type-badge type-ghost">Ghost</span>
-  </p>
+<div class="row g-4">
+  {% for p in pokemons %}
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a href="{% url 'fiche' p.numero %}" class="text-decoration-none text-reset">
+        <div class="carte-pokemon type-{{ p.types.0 }}">
+          <div class="d-flex justify-content-between align-items-start">
+            <h2 class="h5 fw-bold mb-1">{{ p.nom|capfirst }}</h2>
+            <span class="fw-bold opacity-75">#{{ p.numero|stringformat:"03d" }}</span>
+          </div>
+          <div class="mb-2">
+            {% for t in p.types %}
+              <span class="type-badge badge-clair">{{ t|capfirst }}</span>
+            {% endfor %}
+          </div>
+          <img src="{{ p.image }}" alt="{{ p.nom|capfirst }}" class="d-block ms-auto" width="110">
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
 {% endblock %}

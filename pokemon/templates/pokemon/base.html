@@ -13,9 +13,16 @@
 <body>
 
   <header class="site-header">
-    <div class="container">
-      <a class="site-title" href="/">Pokédex</a>
-      <p class="site-subtitle">251 Pokémon à découvrir</p>
+    <div class="container d-flex flex-wrap align-items-end justify-content-between gap-3">
+      <div>
+        <a class="site-title" href="/">Pokédex</a>
+        <p class="site-subtitle">251 Pokémon à découvrir</p>
+      </div>
+      <form class="recherche" action="{% url 'aller' %}" method="get">
+        <label for="numero" class="visually-hidden">Numéro du Pokémon</label>
+        <input id="numero" name="numero" type="number" min="1" max="251" required placeholder="N° (1-251)">
+        <button type="submit">Aller</button>
+      </form>
     </div>
   </header>
 

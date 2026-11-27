@@ -23,6 +23,7 @@ urlpatterns = [
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.accueil),
+    path('', views.accueil, name='accueil'),
+    path('pokemon/aller/', views.aller, name='aller'),
     path('pokemon/<int:numero>/', views.fiche, name='fiche'),
 ]

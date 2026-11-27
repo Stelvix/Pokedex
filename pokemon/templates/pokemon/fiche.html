@@ -6,7 +6,22 @@
 <div class="fiche">
 
   <div class="fiche-entete type-{{ types.0 }}">
-    <span class="fiche-numero">#{{ pokemon.numero|stringformat:"03d" }}</span>
+
+    <!-- 👇 C'EST ICI (remplace l'ancien <span class="fiche-numero">) -->
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="fiche-numero">#{{ pokemon.numero|stringformat:"03d" }}</span>
+      <select class="form-select w-auto rounded-pill fw-bold"
+              aria-label="Choisir un Pokémon"
+              onchange="if (this.value) window.location.href = this.value;">
+        {% for p in pokemons_liste %}
+          <option value="{% url 'fiche' p.numero %}" {% if p.numero == pokemon.numero %}selected{% endif %}>
+            #{{ p.numero|stringformat:"03d" }} – {{ p.nom|capfirst }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <!-- 👆 FIN DU BLOC AJOUTÉ -->
+
     <h1 class="fiche-nom">{{ pokemon.nom|capfirst }}</h1>
     <div>
       {% for t in types %}
@@ -44,6 +59,19 @@
       </div>
     {% endfor %}
     <div class="stat-total">Total : {{ total }}</div>
+
+    <nav class="fiche-nav">
+      {% if precedent %}
+        <a class="btn-nav" href="{% url 'fiche' precedent %}">&laquo; N° {{ precedent|stringformat:"03d" }}</a>
+      {% else %}
+        <span class="btn-nav btn-nav-off" aria-disabled="true">&laquo; Précédent</span>
+      {% endif %}
+      {% if suivant %}
+        <a class="btn-nav" href="{% url 'fiche' suivant %}">N° {{ suivant|stringformat:"03d" }} &raquo;</a>
+      {% else %}
+        <span class="btn-nav btn-nav-off" aria-disabled="true">Suivant &raquo;</span>
+      {% endif %}
+    </nav>
   </div>
 
 </div>
