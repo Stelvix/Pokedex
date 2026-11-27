@@ -1,6 +1,10 @@
 # Pokedex
 Ceci est un projet pokedex fait en python
 
+## Documentation
+
+- [Données et recherche (installation, dépendances, fonctionnement des données)](docs/donnees.md)
+
 ### Notifications Discord – GitHub Webhook
 
 Ce webhook permet de synchroniser les événements importants du dépôt GitHub avec un salon Discord dédié.
