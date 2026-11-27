@@ -25,9 +25,7 @@ def noms(elements, cle):
 
 def preparer_stats(stats):
     resultat = []
-    for s in stats:
-        valeur = s["base_stat"]
-        nom = s["stat"]["name"]
+    for nom, valeur in stats.items():
         if valeur < 60:
             niveau = "bas"
         elif valeur < 90:
