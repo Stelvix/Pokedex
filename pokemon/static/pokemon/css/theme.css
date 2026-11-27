@@ -103,3 +103,36 @@ body {
 .niveau-moyen { background: #B7790A; }
 .niveau-haut  { background: #2E9E5B; }
 .stat-total { border-top: 2px solid #E8EAF0; padding-top: 10px; font-weight: 800; }
+
+/* ---------- Recherche par numéro (en-tête) ---------- */
+.recherche { display: flex; gap: 12px; }
+.recherche input {
+  height: 48px; width: 200px; max-width: 100%;
+  padding: 0 20px; border: 0; border-radius: 24px;
+  font-weight: 500; color: var(--ink);
+}
+.recherche button {
+  height: 48px; padding: 0 24px; border: 0; border-radius: 24px;
+  background: #fff; color: var(--ink); font-weight: 700; cursor: pointer;
+}
+
+/* ---------- Boutons précédent / suivant ---------- */
+.fiche-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 32px; }
+.btn-nav {
+  display: inline-flex; align-items: center; min-height: 48px;
+  padding: 0 22px; border-radius: 24px;
+  background: var(--page-bg); color: var(--ink);
+  font-weight: 700; text-decoration: none;
+}
+.btn-nav:hover { background: #E8EAF0; color: var(--ink); }
+.btn-nav-off { opacity: 0.45; }
+
+.carte-pokemon {
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(27, 27, 47, 0.08);
+  transition: transform 0.15s ease;
+}
+.carte-pokemon:hover {
+  transform: translateY(-4px);
+}
